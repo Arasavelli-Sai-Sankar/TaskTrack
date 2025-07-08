@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskTrack - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-tasks"></i> TaskTrack</h1>
+            <p>Track your tasks and stay productive</p>
+        </header>
+
+        <!-- Add Assignment Form -->
+        <div class="form-container">
+            <h2><i class="fas fa-plus-circle"></i> Add New Task</h2>
+            <form id="assignmentForm" class="assignment-form">
+                <div class="form-group">
+                    <label for="title">Task Title</label>
+                    <input type="text" id="title" name="title" required>
+                    <span class="error-message" id="titleError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="3" required></textarea>
+                    <span class="error-message" id="descriptionError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="datetime-local" id="dueDate" name="dueDate" required>
+                    <span class="error-message" id="dueDateError"></span>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Task
+                    </button>
+                    <button type="button" id="cancelEdit" class="btn btn-secondary" style="display: none;">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Filter and Sort Controls -->
+        <div class="controls">
+            <div class="filter-controls">
+                <label for="statusFilter">Filter by Status:</label>
+                <select id="statusFilter">
+                    <option value="all">All Tasks</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                    <option value="overdue">Overdue</option>
+                </select>
+            </div>
+            
+            <div class="sort-controls">
+                <label for="sortOrder">Sort by Due Date:</label>
+                <select id="sortOrder">
+                    <option value="asc">Earliest First</option>
+                    <option value="desc">Latest First</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Assignments List -->
+        <div class="assignments-section">
+            <h2><i class="fas fa-list"></i> Your Tasks</h2>
+            <div id="assignmentsList" class="assignments-grid">
+                <!-- Assignments will be dynamically loaded here -->
+            </div>
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>No tasks found</h3>
+                <p>Add your first task to get started!</p>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="notification" class="notification">
+            <span id="notificationMessage"></span>
+            <button id="closeNotification" class="close-btn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Edit Task</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="editForm" class="assignment-form">
+                <div class="form-group">
+                    <label for="editTitle">Task Title</label>
+                    <input type="text" id="editTitle" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editDescription">Description</label>
+                    <textarea id="editDescription" name="description" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editDueDate">Due Date</label>
+                    <input type="datetime-local" id="editDueDate" name="dueDate" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Update Task
+                    </button>
+                    <button type="button" class="btn btn-secondary close-modal">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
